@@ -1,8 +1,9 @@
-import { client } from "../client";
 import { notFound } from "next/navigation";
-import { Thread } from "./thread";
 import { Suspense } from "react";
-import Loading from "./threadloading";
+import { client } from "../client";
+import { ProfilePictureLoading } from "./loading";
+import ProfileHeader from "./profile";
+import { Thread } from "./thread";
 
 export default async function Page({ params }: any) {
   const uid = await client.getUserIDfromUsername(params.username);
@@ -13,15 +14,17 @@ export default async function Page({ params }: any) {
   const posts = await client.getUserProfileThreads(uid);
 
   return (
-    <>
-      <h1>{user.username}</h1>
-      <main className=" w-5/6 mx-auto mt-5">
+    <div className="lg:w-4/6 xl:w-1/2 w-5/6 mx-auto mt-3">
+      <header className="">
+        <ProfileHeader user={user}/>
+      </header>
+      <main className=" mt-5">
         {posts.map((thread) => (
-          <Suspense fallback={<Loading />}>
-            <Thread thread={thread.thread_items.at(0)?.post!} key={thread.id} />
+          <Suspense key={thread.id} fallback={<ProfilePictureLoading />}>
+            <Thread thread={thread.thread_items.at(0)?.post!} key={thread.id} quoted={false} />
           </Suspense>
         ))}
       </main>
-    </>
+    </div>
   );
 }

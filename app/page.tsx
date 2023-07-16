@@ -1,11 +1,7 @@
-import { client } from './client';
+import { client } from "./client";
 
 export default async function Home() {
-  const threadsAPI = client;
-  const username = "leovlmm";
-  const userId = await threadsAPI.getUserIDfromUsername(username);
-  const posts = await threadsAPI.getUserProfileThreads(userId!);
-  console.log(posts);
-
-  return <></>
+  const threadURL = "https://www.threads.net/t/CuqbBI8h19H";
+  const postIDToQuote = await client.getPostIDfromURL(threadURL); // or use `getPostIDfromThreadID`
+  return <div></div>;
 }

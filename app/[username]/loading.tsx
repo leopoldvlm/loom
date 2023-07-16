@@ -1,4 +1,8 @@
 export default function Loading() {
+  return <div className=" text-9xl mx-auto my-auto">🧵</div>
+}
+
+export function ThreadLoading() {
   return (
     <div className="border-y py-5 border-y-lines">
       <div className="animate-pulse flex space-x-4">
@@ -16,4 +20,8 @@ export default function Loading() {
       </div>
     </div>
   );
+}
+
+export function ProfilePictureLoading() {
+  return <div className="h-[20px] w-[20px] animate-pulse rounded-full"></div>
 }
