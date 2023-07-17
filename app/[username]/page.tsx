@@ -15,13 +15,15 @@ export default async function Page({ params }: any) {
 
   return (
     <div className="lg:w-4/6 xl:w-1/2 w-5/6 mx-auto mt-3">
-      <header className="">
-        <ProfileHeader user={user}/>
-      </header>
+      <ProfileHeader user={user} />
       <main className=" mt-5">
         {posts.map((thread) => (
           <Suspense key={thread.id} fallback={<ProfilePictureLoading />}>
-            <Thread thread={thread.thread_items.at(0)?.post!} key={thread.id} quoted={false} />
+            <Thread
+              thread={thread.thread_items.at(0)?.post!}
+              key={thread.id}
+              quoted={false}
+            />
           </Suspense>
         ))}
       </main>

@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { ThreadLoading } from "./loading";
 import Link from "next/link";
 import moment from "moment";
+import PostText from "./postText";
 
 const getRepost = (thread: Post) =>
   thread.text_post_app_info.share_info.reposted_post;
@@ -37,7 +38,7 @@ export async function Thread({
   return (
     <section
       className={`${
-        isRepost && "before:content-['↻🧵']"
+        isRepost && `before:content-['↻🧵']`
       } py-5 border-lines border-y ${quoted && "border-x rounded-lg px-5"}`}
     >
       <header className="flex flex-row w-full justify-between">
@@ -62,6 +63,9 @@ export async function Thread({
           {moment(thread.taken_at, "X").fromNow()}
         </p>
       </header>
+
+      {/* <PostText text={thread.caption?.text || ''}/> */}
+
       <p className="my-3">{thread.caption?.text}</p>
 
       {quotedPost && (
